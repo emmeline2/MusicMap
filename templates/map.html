@@ -9,24 +9,30 @@
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
 integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
 crossorigin=""/>
-<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
-integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
-crossorigin=""></script>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.8.0/dist/leaflet.css" integrity="sha512-hoalWLoI8r4UszCkZ5kL8vayOGVae1oxXe/2A4AO6J9+580uKHDO3JdHb7NzwwzK5xr/Fs0W40kiNHxM9vyTtQ==" crossorigin="" />
+<script src="https://unpkg.com/leaflet@1.8.0/dist/leaflet.js" integrity="sha512-BB3hKbKWOc9Ez/TAwyWxNXeoV9c1v6FIeYiBieIWkpLjauysF18NzgR1MBNBXf8/KABdlkX68nAhlwcDFLGPCQ==" crossorigin="">
+</script>
 </head>
 
 <h1>Map: </h1>
 
 <div id="map"></div>
 <script src="{{ url_for('static', filename='universal.js') }}"></script>
-
-
-{% for marker in markers %}
-    L.marker([{{ marker['lat'] }}, {{ marker['lon'] }}]).addTo(map)
-    .bindPopup("{{ marker['popup'] }}")
-    .openPopup();
-{% endfor %}
-
-
-
+<h3>Before loop</h3>
+Markers first:
+Variable: 
+<p id="var"></p>
+end:
+<script type="text/javascript">
+    Markers: 
+    document.write(markers)
+    {% for marker in markers %}
+        <h3>looping</h3>
+        L.marker([{{ marker['lat'] }}, {{ marker['lon'] }}]).addTo(map)
+        .bindPopup("{{ marker['popup'] }}")
+        .openPopup();
+    {% endfor %}
+</script>
+<h3>Here</h3>
 
 {% endblock %}

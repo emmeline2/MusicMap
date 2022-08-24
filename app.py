@@ -82,6 +82,7 @@ def delete(id):
 
 @app.route('/map')
 def map():
+   var = 7
    markers=[
    {
    'lat':0,
@@ -89,4 +90,7 @@ def map():
    'popup':'This is the middle of the map.'
     }
    ]
-   return render_template('map.html', markers=markers)
+   return render_template('map.html', markers=markers, var=var)
+
+if __name__ == '__main__':
+    app.run(host="localhost", port=8080, debug=True)
