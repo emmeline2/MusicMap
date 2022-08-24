@@ -7,12 +7,12 @@ with open('schema.sql') as f:
 
 cur = connection.cursor()
 
-cur.execute("INSERT INTO posts (title, content) values (?,?)",
-           ('First Song', 'Artist: A -- Content for the first Song')
+cur.execute("INSERT INTO posts (title, content, lat, lon) values (?,?,?,?)",
+           ('Here Comes the Sun', 'The Beatles', 53, 3)
            )
 
-cur.execute("INSERT INTO posts (title, content) values (?,?)",
-           ('Second Song', 'Artist: B -- Content for the second song')
+cur.execute("INSERT INTO posts (title, content, lat, lon) values (?,?,?,?)",
+           ('Can\'t hold us', 'Macklemore', 47, -122)
            )
 
 connection.commit()

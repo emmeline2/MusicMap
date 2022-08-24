@@ -86,11 +86,20 @@ def delete(id):
 
 @app.route('/map')
 def map():
-    markers=[
-        {
-        'lat':0,
-        'lon':0,
-        'popup':'This is the middle of the map.'
-        },
-    ]
+    conn = get_db_connection()
+    posts = conn.execute('SELECT * FROM posts').fetchall()
+    conn.close()
+
+    print("POSTS: ", posts)
+    # create markers matrix
+    markers = []
+    for post in posts:
+        pin_point = {
+            'lat': post['lat'],
+            'lon': post['lon'],
+            'popup': (post['title'] + " : " + post['content']),
+        }
+        markers.append(pin_point)
+        pin_point = {}
+
     return render_template('map.html',markers=markers )
