@@ -44,11 +44,13 @@ def create():
     if request.method == 'POST': 
         title = request.form['title']
         content = request.form['content']
+        lat = request.form['lat']
+        lon = request.form['lon']
     if not title: 
         flash('Title is required!')
     else: 
         conn = get_db_connection()
-        conn.execute('INSERT INTO posts (title,content) VALUES (?,?)', (title, content))
+        conn.execute('INSERT INTO posts (title,content, lat, lon) VALUES (?,?, ?,?)', (title, content, lat, lon))
         conn.commit()
         conn.close()
         return redirect(url_for('index'))
@@ -60,14 +62,16 @@ def edit(id):
     if request.method == 'POST':
         title = request.form['title']
         content = request.form['content']
+        lat = request.form['lat']
+        lon = request.form['lon']
     
         if not title: 
             flash('Title is required!')
         else: 
             conn = get_db_connection()
-            conn.execute('UPDATE posts SET title = ?, content = ?'
+            conn.execute('UPDATE posts SET title = ?, content = ?, lat = ?, lon = ?'
             ' WHERE id = ?', 
-            (title, content, id))
+            (title, content, lat, lon, id))
             conn.commit()
             conn.close()
             return redirect(url_for('index'))
